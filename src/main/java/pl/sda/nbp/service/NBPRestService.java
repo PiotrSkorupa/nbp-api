@@ -12,20 +12,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import pl.sda.nbp.model.Currency;
 import pl.sda.nbp.model.CurrencyRequest;
+import pl.sda.nbp.validate.CurrencyRequestValidator;
+import pl.sda.nbp.validate.CurrencyValidator;
 
 public class NBPRestService implements NBPService {
 
     private HttpClient httpClient;
     private ObjectMapper objectMapper;
 
+    private CurrencyValidator currencyValidator;
+
     private static final String NBP_URL_PATTERN = "http://api.nbp.pl/api/exchangerates/rates/a/%s/%s/%s";
 
     public NBPRestService(HttpClient httpClient) {
         this.httpClient = httpClient;
         this.objectMapper = new ObjectMapper();
+        this.currencyValidator = new CurrencyRequestValidator();
     }
 
     public Currency getCurrency(CurrencyRequest currencyRequest) {
+        currencyValidator.validate(currencyRequest);
+
         HttpUriRequest httpRequest = createHttpRequest(currencyRequest);
         try {
             HttpResponse execute = httpClient.execute(httpRequest);
