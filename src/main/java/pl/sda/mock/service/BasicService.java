@@ -3,7 +3,7 @@ package pl.sda.mock.service;
 public class BasicService implements HelloService {
     @Override
     public String say() {
-        return "Basic Controller";
+        return "Basic Service";
     }
 
     @Override
