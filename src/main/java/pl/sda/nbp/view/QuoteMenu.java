@@ -8,6 +8,7 @@ import pl.sda.nbp.model.Currency;
 import pl.sda.nbp.model.CurrencyRequest;
 import pl.sda.nbp.service.NBPRestService;
 import pl.sda.nbp.service.NBPService;
+import pl.sda.nbp.validate.CurrencyRequestValidator;
 
 public class QuoteMenu implements Displayable {
 
@@ -15,7 +16,7 @@ public class QuoteMenu implements Displayable {
 
     public QuoteMenu() {
         nbpService = new NBPRestService(HttpClientBuilder.create()
-                .build());
+                .build(), new CurrencyRequestValidator());
     }
 
     @Override

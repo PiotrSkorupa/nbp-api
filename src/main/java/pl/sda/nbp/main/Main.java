@@ -5,12 +5,13 @@ import pl.sda.nbp.model.Currency;
 import pl.sda.nbp.model.CurrencyRequest;
 import pl.sda.nbp.service.NBPRestService;
 import pl.sda.nbp.service.NBPService;
+import pl.sda.nbp.validate.CurrencyRequestValidator;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        NBPService nbpService = new NBPRestService(HttpClientBuilder.create().build());
+        NBPService nbpService = new NBPRestService(HttpClientBuilder.create().build(),new CurrencyRequestValidator());
 
         CurrencyRequest currencyRequest = new CurrencyRequest();
         currencyRequest.setCurrencyCode("eur");

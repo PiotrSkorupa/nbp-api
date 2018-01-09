@@ -24,10 +24,10 @@ public class NBPRestService implements NBPService {
 
     private static final String NBP_URL_PATTERN = "http://api.nbp.pl/api/exchangerates/rates/a/%s/%s/%s";
 
-    public NBPRestService(HttpClient httpClient) {
+    public NBPRestService(HttpClient httpClient,CurrencyValidator currencyValidator) {
         this.httpClient = httpClient;
         this.objectMapper = new ObjectMapper();
-        this.currencyValidator = new CurrencyRequestValidator();
+        this.currencyValidator = currencyValidator;
     }
 
     public Currency getCurrency(CurrencyRequest currencyRequest) {

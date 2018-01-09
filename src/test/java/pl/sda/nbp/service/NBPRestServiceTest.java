@@ -25,6 +25,7 @@ import org.mockito.Mockito;
 import pl.sda.nbp.model.Currency;
 import pl.sda.nbp.model.CurrencyRequest;
 import pl.sda.nbp.model.Rate;
+import pl.sda.nbp.validate.CurrencyValidator;
 
 public class NBPRestServiceTest {
 
@@ -39,12 +40,15 @@ public class NBPRestServiceTest {
     @Mock
     private HttpEntity httpEntity;
 
+    @Mock
+    private CurrencyValidator currencyValidator;
+
     private NBPService nbpService;
 
     @Before
     public void setUp() {
         initMocks(this);
-        nbpService = new NBPRestService(httpClient);
+        nbpService = new NBPRestService(httpClient, currencyValidator);
     }
 
     @Test
